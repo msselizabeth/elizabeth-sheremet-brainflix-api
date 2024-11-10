@@ -66,6 +66,19 @@ router.post("/", upload.single("thumbnail"), (req, res) => {
     res.status(201).json(newVideo);
 });
 
+// get video by ID
+router.get("/:id", ((req, res) => {
+    const { id } = req.params;
+    const videosData = JSON.parse(fs.readFileSync("./data/videos.json"));
 
+    const video = videosData.find((video) => video.id === id);
+
+    if (!video) {
+        res.status(404).send(`Error could not find product with id: ${id}`);
+        return;
+    }
+
+    res.json(video);
+}));
 
 export default router;
