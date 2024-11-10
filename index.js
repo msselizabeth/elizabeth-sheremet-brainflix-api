@@ -12,8 +12,12 @@ app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
 app.use(express.static("public"));
 
+
+import vidoesRoutes from "./routes/videos.js";
+app.use("/videos", vidoesRoutes);
+
 app.get("/", async (req, res) => {
-   res.status(200).json({message: "Hiiii"})
+   res.status(200).json({message: "Hi from server"})
   });
 
 // processing unsupported routes
